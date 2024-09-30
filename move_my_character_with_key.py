@@ -11,13 +11,16 @@ TUK_WIDTH, TUK_HEIGHT = 1280 , 1024
 open_canvas(TUK_WIDTH, TUK_HEIGHT)
 
 back = load_image('TUK_GROUND.png')
-character = load_image('move_ani.png')
+character = load_image('move_ani2.png')
 
 def move_all(frame,move,x,y, rad):
     rad=rad/180* math.pi
     clear_canvas()
     back.draw(TUK_WIDTH/2, TUK_HEIGHT/2)
-    character.clip_composite_draw(frame*100, move*150 ,100,150 ,rad,'i',x,y,100,150)
+    if move==0 or move==1:
+        character.clip_composite_draw(frame*55, move*80 ,55,80 ,rad,'i',x,y,100,150)
+    elif move==2 or move==3:
+        character.clip_composite_draw(55*4+frame*105, (move-2)*160 ,105,160 ,rad,'i',x,y,100,150)
     #character.clip_composite_draw(frame*100,0,100,100 ,rad,'v',x,y,100,100)
     update_canvas()
     delay(0.1)
