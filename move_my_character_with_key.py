@@ -5,7 +5,7 @@ move=1;
 key = False;
 x=300
 y=400
-up,down,r,l=0,0,0,0
+up,down,r,l = 0,0,0,0
 
 TUK_WIDTH, TUK_HEIGHT = 1280 , 1024
 open_canvas(TUK_WIDTH, TUK_HEIGHT)
@@ -40,21 +40,16 @@ def handle_events():
         elif event.type == SDL_KEYDOWN:
             key =True
             if event.key==SDLK_RIGHT:
-                move=0
                 r=1;
             if event.key==SDLK_LEFT:
-                move=1
                 l=1
             if event.key==SDLK_UP:
-                move=2
                 up=1
             if event.key==SDLK_DOWN:
-                move=3
                 down =1
             if event.key==SDLK_ESCAPE:
                 move=5
         elif event.type == SDL_KEYUP:
-            #key=0;
             if event.key==SDLK_RIGHT:
                 r=0
             if event.key==SDLK_LEFT:
@@ -63,6 +58,8 @@ def handle_events():
                 up=0
             if event.key==SDLK_DOWN:
                 down =0
+            if up==0 and down==0 and r==0 and l==0:
+                key=0;
 
 frame=0
 while 1:
@@ -73,12 +70,16 @@ while 1:
        if key:
            run(frame,move,x,y)
            if r:
+               move=0
                x+=20;
            if l:
+               move=1
                x-=20;
            if up:
+               move=2
                y+=20;
            if down:
+               move=3
                y-=20;
        else:
             stand(x,y)
